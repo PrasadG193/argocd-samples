@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    testsample: "true"
+  name: test2
+spec:
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-dep1
+  name: my-dep1
+  namespace: test2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-dep1
+  template:
+    metadata:
+      labels:
+        app: my-dep1
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: my-dep2
+  name: my-dep2
+  namespace: test2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-dep2
+  template:
+    metadata:
+      labels:
+        app: my-dep2
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
